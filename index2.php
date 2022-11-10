@@ -1,0 +1,288 @@
+<?php
+session_start();
+if (!$_SESSION['user']) {
+    header('Location: /');
+}
+require_once 'php/vendor/connect.php';
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projetc - главная страница</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header__inner">
+                <a href="index2.php" class="header__logo">Project</a>
+                <div class="header__burger">
+                    <span></span>
+                </div>
+                <nav class="header__nav" id="nav">
+                    <ul class="header__list">
+                        <li class="header__item">
+                            <a href="#intro" class="header__link">Главная</a>
+                        </li>
+                        <li class="header__item">
+                            <a href="#about" class="header__link">О нас</a>
+                        </li>
+                        <li class="header__item">
+                            <a href="#news" class="header__link">Новости</a>
+                        </li>
+                        <li class="header__item">
+                            <a href="#cases" class="header__link">Кейсы</a>
+                        </li>
+                        <div class="dropdown">
+                            <img src="/img/bottom-arrow.png" width="10px" height="10px" alt="btn" class="dropbtn" onclick="myFunction()">
+                        </img>
+                            <div class="dropdown-content" id="myDropdown">
+                              <a href="/php/price2.php">Услуги</a>
+                              <a href="/php/portfolio2.php">Портфолио</a>
+                            </div>
+                        </div> 
+                        <li class="header__item">
+                            <a href="#contacts" class="header__link">Контакты</a>
+                        </li>
+                        <li class="header__item">
+                            <a href="/php/index.php" class="header__link"><img src="/img/user.png" width="30px" height="30px" alt="logo"></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="main">
+        <section class="intro"  id="intro">
+            <div class="container">
+                <div class="intro-content">
+                <div class="intro1">
+                <p class="inrto__subtitle">Студия Digital дизайна</p>
+                <h1 class="intro__title">Мы создаем легкие решения сложных задач и проблем</h1>
+                </div>
+                <div class="intro2">
+                <form action="php/vendor/zayavka.php" method = "post" id="contact-form" onSubmit="alert( 'Ваша заявка принята!' );">
+                <p class="intro__subtitle">Заполните форму ниже, чтобы оставить заявку</p>
+                <div class="form-group">
+                <input type="text" name="Phone" id="Phone" class="form-control wow fadeInUp" placeholder="Введите номер телефона" required/>
+                </div>
+                <div class="form-group">
+                <select name="Select" id="Select" class="form-control wow fadeInUp" placeholder="Выберите услугу">
+                       <option value="0">Выберите услугу</option>
+                      <?php
+                      $price = mysqli_query($connect, "SELECT `id` , `name` FROM `price`");
+                      while($row = mysqli_fetch_assoc($price)){
+                          ?>
+                          <option value="<?=$row['id']?>"><?=$row['name']?></option>
+                          <?php
+                      }
+                      ?>
+                </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="submit" value="Оставить заяку" class="intro__btn" id="btn_submit">
+                </div>
+                </form>
+                </div>
+                </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about"  id="about">
+            <div class="container">
+                <div class="about__inner">
+                    <div class="about__left__content"> 
+                        <p class="about__left__subtitle">О нас</p>
+                        <h1 class="about__left__title">PROJECT</h1>
+                        <p class="about__left__description">Сферы деятельности – разработка эффективных и «эффектных» презентационных материалов, промо-роликов и виртуальных туров, брендирование, стратегическое проектирование и планирование, it-автоматизация бизнес-процессов, организация и проведение мероприятий, практико-ориентированное обучение детей и молодежи, подготовка компетентных специалистов под разнообразные задачи, выполнение научно-исследовательских и опытно-конструкторских работ, инжиниринг и консалтинг.</p>
+                    </div> 
+                    <div class="about__right__content">
+                        <div class="about__card">
+                            <h1 class="about__right__title">123</h1>
+                            <p class="about__right__text">Выполненных заказа</p>
+                            <a href="#" class="about__card__link">Все проекты</a>
+                        </div>
+                        <div class="about__card">
+                            <h1 class="about__right__title">46</h1>
+                            <p class="about__right__text">Проведенных мероприятий</p>
+                            <a href="#" class="about__card__link">Все проекты</a>
+                        </div>
+                        <div class="about__card">
+                            <h1 class="about__right__title">26</h1>
+                            <p class="about__right__text">Промо-роликов</p>
+                            <a href="#" class="about__card__link">Все проекты</a>
+                        </div>
+                        <div class="about__card">
+                            <h1 class="about__right__title">90</h1>
+                            <p class="about__right__text">Автоматизаций бизнесс-процессов</p>
+                            <a href="#" class="about__card__link">Все проекты</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="news"  id="news">
+            <div class="container">
+                <p class="content__subtitle">Новости</p>
+                <h1 class="content__title">Все, что ни делается, — все к лучшему</h1>
+                <section class="grid">
+                    <!-- Еще блоки -->
+
+                    <article class="grid-item">
+                        <div class="image">
+                            <img src="../img/004.jpg" />
+                        </div>
+                        <div class="info">
+                            <h2>Что такое 3D-визуализация?</h2>
+                            <div class="info-text">
+                                <p>3D-визуализация – является неотъемлемой составляющей архитектурного проектирования, позволяющая графически создать экстерьер здания и интерьер помещений максимальной реалистичности.</p>
+                            </div>
+                            <!--<div class="button-wrap">
+                                <a class="atuin-btn" href="#link">Развернуть</a>
+                            </div>-->
+                        </div>
+                    </article>
+                    
+                    <!-- Еще блоки -->
+                    
+                    <article class="grid-item">
+                        <div class="image">
+                            <img src="../img/005.jpg" alt="">
+                        </div>
+                        <div class="info">
+                            <h2>"Точка кипения" - Уфа</h2>
+                            <div class="info-text">
+                                <p>Ответ утвердительный! В Уфе будет открыта «Точка кипения».</p> 
+                            </div>
+                            <!--<div class="button-wrap">
+                                <a class="atuin-btn" href="#link">Развернуть</a>
+                            </div>-->
+                        </div>
+                    </article>   
+                    
+                    <!-- Еще блоки -->
+                    
+                    <article class="grid-item">
+                        <div class="image">
+                            <img src="../img/slide-640.jpg" />
+                        </div>
+                        <div class="info">
+                            <h2>Детская форсайт-школа</h2>
+                            <div class="info-text">
+                            <p>С 21 по 23 апреля в г. Анапа в центре профессий «Парк Будущего» для участников профильной смены «Инженеры будущего: 3D технологии в образовании» в рамках смены «Город Мастеров» была организована форсайт-школа.</p>
+                            </div>
+                            <!--<div class="button-wrap">
+                                <a class="atuin-btn" href="#link">Развернуть</a>
+                            </div>-->
+                        </div>
+                    </article>    
+                </section>
+            </div>
+        </section>
+
+        <section class="cases" id="cases">
+            <div class="container">
+                <p class="content__subtitle">Кейсы</p>
+                <h1 class="content__title">Ознакомьтесь с нашими предложениями.</h1>
+            </div>
+                <div class="cases__places">
+                    <div class="case__image1">
+                        <a href="/php/price.php" class="cases__places__link">Услуги</a>
+                    </div>
+                    <div class="case__image2">
+                        <a href="/php/portfolio.php" class="cases__places__link">Портфолио</a>
+                    </div>
+                </div>
+        </section>
+
+        <section class="contacts" id="contacts">
+            <div class="container">
+                <p class="content__subtitle">Контактная информация</p>
+                <h1 class="content__title">Вы можете найти нас здесь</h1>
+                <div class="contacts__inner">
+                    <div class="contacts__left">
+                        <p class="content__description">project@domen.com</p>
+                        <p class="content__description">+8 777 555 66 99</p>
+                        <p class="content__description">Уфа, Кирова 65</p>
+                    </div>
+                    <div class="contacts__right">
+                        <div class="row">
+                            <div class="col"> 
+                            
+                            
+                            
+                            <div class="map"> <!-- значения смотрите в файле css/style.css -->
+                            
+                            <!-- Код карты от Яндекс - без параметров width="ххх" height="ххх" и frameborder="х" -->
+                            <iframe src="https://yandex.ru/map-widget/v1/-/CCUU70tGdA" allowfullscreen="true" style="position:relative;"></iframe>
+                            <!-- Конец код карты от Яндекс -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+    
+            <div class="footer__inner">
+                <div class="footer__block">
+                    <h4 class="footer__title">Контактная информация</h4>
+                    <address class="footer__address">
+                        <div>project@domen.com</div>
+                        <div>+8 777 555 66 99</div>
+                    </address>
+                </div>
+    
+                <div class="footer__block">
+                    <h4 class="footer__title">Подпишись на нас!</h4>
+                    <div class="footer-block  footer-social">
+                        <a href="#" class="btn footer-social-vk">вконтакте</a>
+                        <a href="#" class="btn footer-social-fb">фейсбук</a>
+                        <a href="#" class="btn footer-social-inst">инстаграм</a>
+                    </div>
+                </div>
+    
+                <div class="footer__block">
+                    <h4 class="footer__title">Навигация</h4>
+                    <div class="footer__text">
+                        <a href="index2.php" class="footer__link">Главная</a>
+                        <a href="/php/price2.php" class="footer__link">Услуги</a>
+                        <a href="/php/portfolio2.php" class="footer__link">Портфолио</a>
+                    </div>
+                </div>
+            </div><!-- /.footer__inner -->
+    
+        </div><!-- /.container -->
+    
+        <div class="copyright">
+            <div class="container">
+                <div class="copyright__text">
+                    <div>Copyright © 2021 Project. Все права защищены</div>
+                    <div>Made <span>by АКВ</span></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="/js/script.js"></script>
+
+</body>
+
+</html>
